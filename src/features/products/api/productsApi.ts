@@ -8,6 +8,8 @@ let products: Product[] = [
   { id: 3, name: "Meeting-Magnet", description: "Macht Meetings leider nicht kürzer.", price: 4.2, category: "Kurioses", emoji: "🧲" },
   { id: 4, name: "Code-Review-Becher", description: "Für konstruktive Kommentare und warme Getränke.", price: 12.5, category: "Kaffee", emoji: "🥤" },
   { id: 5, name: "Ergonomischer Kaktus", description: "Stacheliges Feedback für deinen Schreibtisch.", price: 19.99, category: "Schreibtisch", emoji: "🌵" },
+  { id: 6, name: "Noise-Cancelling-Wunder", description: "Filtert Baustellenlärm und laute Nachbarn zuverlässig.", price: 149.0, category: "Homeoffice", emoji: "🎧" },
+  { id: 7, name: "Pyjama-Hemd-Kombi", description: "Oben Business für den Video-Call, unten ultra-bequem.", price: 39.9, category: "Homeoffice", emoji: "👔" },
 ];
 
 let simulateFailure = false;

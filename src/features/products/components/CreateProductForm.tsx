@@ -108,6 +108,7 @@ export function CreateProductForm() {
               <MenuItem value="Kaffee">Kaffee</MenuItem>
               <MenuItem value="Schreibtisch">Schreibtisch</MenuItem>
               <MenuItem value="Kurioses">Kurioses</MenuItem>
+              <MenuItem value="Homeoffice">Homeoffice</MenuItem>
             </Select>
           </FormControl>
           <Button type="submit" variant="contained" disabled={mutation.isPending} fullWidth>

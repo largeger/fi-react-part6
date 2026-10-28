@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { fetchProducts } from "../api/productsApi";
 import type { CategoryFilter } from "../../../shared/types/product";
 
-const categories: CategoryFilter[] = ["Alle", "Kaffee", "Schreibtisch", "Kurioses"];
+const categories: CategoryFilter[] = ["Alle", "Kaffee", "Schreibtisch", "Kurioses", "Homeoffice"];
 
 function isCategory(value: string | null): value is CategoryFilter {
   return value !== null && categories.includes(value as CategoryFilter);

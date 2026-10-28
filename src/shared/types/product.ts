@@ -1,5 +1,5 @@
 // Zentrale Typen halten API, UI und Warenkorb konsistent.
-export type Category = "Kaffee" | "Schreibtisch" | "Kurioses";
+export type Category = "Kaffee" | "Schreibtisch" | "Kurioses" | "Homeoffice";
 export type CategoryFilter = "Alle" | Category;
 
 export type Product = {

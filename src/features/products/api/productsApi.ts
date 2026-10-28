@@ -1,4 +1,4 @@
-import type { CategoryFilter, NewProduct, Product } from "../../shared/types/product";
+import type { CategoryFilter, NewProduct, Product } from "../../../shared/types/product";
 
 // Simulierte Backend-API: keine Serverinstallation nötig. In einer echten App
 // würden diese Funktionen fetch() auf einen REST-Endpunkt aufrufen.

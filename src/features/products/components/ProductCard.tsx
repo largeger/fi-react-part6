@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogActions,
   Box,
+  Rating,
 } from "@mui/material";
 import type { Product } from "../../../shared/types/product";
 import { useCartStore } from "../../cart/store/cartStore";
@@ -40,6 +41,15 @@ export function ProductCard({ product }: { product: Product }) {
           <Typography variant="body2" color="text.secondary">
             {product.description}
           </Typography>
+          <Box sx={{ mt: 1 }}>
+            {product.rating !== undefined ? (
+              <Rating value={product.rating} readOnly precision={0.5} size="small" />
+            ) : (
+              <Typography variant="body2" color="text.disabled">
+                Noch nicht bewertet
+              </Typography>
+            )}
+          </Box>
         </CardContent>
         <CardActions sx={{ justifyContent: "space-between", px: 2, pb: 2 }}>
           <Typography variant="h6" fontWeight={700} color="primary">
@@ -75,6 +85,15 @@ export function ProductCard({ product }: { product: Product }) {
           <Typography variant="h5" fontWeight={700} mt={2}>
             {product.price.toFixed(2)} €
           </Typography>
+          <Box sx={{ mt: 1 }}>
+            {product.rating !== undefined ? (
+              <Rating value={product.rating} readOnly precision={0.5} size="small" />
+            ) : (
+              <Typography variant="body2" color="text.disabled">
+                Noch nicht bewertet
+              </Typography>
+            )}
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDetailsOpen(false)} variant="contained" fullWidth>

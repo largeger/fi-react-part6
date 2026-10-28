@@ -9,6 +9,7 @@ export type Product = {
   price: number;
   category: Category;
   emoji: string;
+  rating?: number;
 };
 
 // Die ID vergibt die API erst beim Anlegen.

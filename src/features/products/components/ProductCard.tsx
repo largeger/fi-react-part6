@@ -28,7 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
           display: "flex",
           flexDirection: "column",
           transition: "transform 0.2s, box-shadow 0.2s",
-          "&:hover": { transform: "translateY(-4px)", boxShadow: 6 },
+          "&:hover": { transform: "translateY(-4px)" },
         }}
       >
         <CardContent sx={{ flexGrow: 1 }}>

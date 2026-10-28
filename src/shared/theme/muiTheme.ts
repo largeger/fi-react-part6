@@ -48,11 +48,11 @@ export function buildMuiTheme(mode: "light" | "dark") {
       },
       MuiCard: {
         styleOverrides: {
-          root: {
+          root: ({theme}) =>  ({
             "&:hover": {
-              boxShadow: 8,
+              boxShadow: theme.shadows[8],
             },
-          },
+          }),
         },
       },
     },

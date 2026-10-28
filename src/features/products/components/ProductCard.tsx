@@ -19,8 +19,8 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProduct } from "../api/productsApi";
 import type { Product } from "../../../shared/types/product";
-import { useCartStore } from "../../cart/store/cartStore";
-import { useWishlistStore } from "../../wishlist/store/wishlistStore";
+import { useCartStore } from "../../cart";
+import { useWishlistStore } from "../../wishlist";
 
 export function ProductCard({ product }: { product: Product }) {
   // Der Dialogstatus ist lokal: andere Komponenten müssen ihn nicht kennen.

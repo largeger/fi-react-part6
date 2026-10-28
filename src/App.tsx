@@ -16,11 +16,13 @@ import {
 } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { ProductList } from "./features/products/components/ProductList";
-import { CreateProductForm } from "./features/products/components/CreateProductForm";
-import { CartPanel } from "./features/cart/components/CartPanel";
-import { WishlistPanel } from "./features/wishlist/components/WishlistPanel";
-import { setSimulateApiFailure } from "./features/products/api/productsApi";
+// Übung 6 Reflexion – Barrel Exports:
+// ✅ Vorteile: Kürzere Imports, austauschbare interne Ordnerstruktur, klar definiertes Public API des Features.
+// ⚠️ Nachteile: Potenzielle zirkuläre Abhängigkeiten, Tree-Shaking-Einschränkungen bei manchen Bundlern.
+// 🤔 Wann sinnvoll? Sinnvoll bei modularer Feature-Architektur ab mittlerer Projektgröße, um Modulgrenzen zu wahren.
+import { ProductList, CreateProductForm, setSimulateApiFailure } from "./features/products";
+import { CartPanel } from "./features/cart";
+import { WishlistPanel } from "./features/wishlist";
 import { useThemeMode } from "./shared/context/ThemeContext";
 
 export function App() {

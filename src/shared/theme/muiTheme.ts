@@ -16,9 +16,15 @@ export function buildMuiTheme(mode: "light" | "dark") {
         default: mode === "light" ? "#f8fafc" : "#0f172a",
         paper: mode === "light" ? "#ffffff" : "#1e293b",
       },
+      error: {
+        main: "#dc2626",
+      },
     },
     typography: {
       fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      h6: {
+        fontWeight: 700,
+      },
     },
     shape: {
       borderRadius: 12,
@@ -37,6 +43,15 @@ export function buildMuiTheme(mode: "light" | "dark") {
         styleOverrides: {
           root: {
             fontWeight: 500,
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              boxShadow: 8,
+            },
           },
         },
       },

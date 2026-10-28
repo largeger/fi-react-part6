@@ -15,11 +15,14 @@ import {
 } from "@mui/material";
 import type { Product } from "../../../shared/types/product";
 import { useCartStore } from "../../cart/store/cartStore";
+import { useWishlistStore } from "../../wishlist/store/wishlistStore";
 
 export function ProductCard({ product }: { product: Product }) {
   // Der Dialogstatus ist lokal: andere Komponenten müssen ihn nicht kennen.
   const [detailsOpen, setDetailsOpen] = useState(false);
   const addItem = useCartStore((state) => state.addItem); // Nur die Aktion abonnieren.
+  const hasWishlistItem = useWishlistStore((state) => state.hasItem);
+  const addWishlistItem = useWishlistStore((state) => state.addItem);
 
   return (
     <>
@@ -56,6 +59,15 @@ export function ProductCard({ product }: { product: Product }) {
             {product.price.toFixed(2)} €
           </Typography>
           <Box>
+            <Button
+              size="small"
+              variant="text"
+              color={hasWishlistItem(product.id) ? "error" : "inherit"}
+              onClick={() => addWishlistItem(product)}
+              sx={{ mr: 1 }}
+            >
+              ♥ Merken
+            </Button>
             <Button size="small" variant="text" onClick={() => setDetailsOpen(true)} sx={{ mr: 1 }}>
               Details
             </Button>

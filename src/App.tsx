@@ -19,6 +19,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ProductList } from "./features/products/components/ProductList";
 import { CreateProductForm } from "./features/products/components/CreateProductForm";
 import { CartPanel } from "./features/cart/components/CartPanel";
+import { WishlistPanel } from "./features/wishlist/components/WishlistPanel";
 import { setSimulateApiFailure } from "./features/products/api/productsApi";
 import { useThemeMode } from "./shared/context/ThemeContext";
 
@@ -96,6 +97,9 @@ export function App() {
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             <CartPanel />
+            <Box sx={{ mt: 3 }}>
+              <WishlistPanel />
+            </Box>
             <Paper elevation={1} sx={{ p: 3, mt: 3 }}>
               <Typography variant="overline" color="text.secondary">
                 ARCHITEKTUR AUF EINEN BLICK

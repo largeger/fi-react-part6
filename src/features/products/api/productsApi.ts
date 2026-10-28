@@ -34,3 +34,12 @@ export async function createProduct(input: NewProduct): Promise<Product> {
   products = [...products, created]; // Immutable Update wie bei typischen API-Daten.
   return { ...created };
 }
+
+export async function updateProduct(id: number, input: Partial<NewProduct>): Promise<Product> {
+  await wait(500);
+  maybeFail();
+  const index = products.findIndex((p) => p.id === id);
+  if (index === -1) throw new Error(`Produkt #${id} nicht gefunden.`);
+  products = products.map((p) => (p.id === id ? { ...p, ...input } : p));
+  return { ...products.find((p) => p.id === id)! };
+}

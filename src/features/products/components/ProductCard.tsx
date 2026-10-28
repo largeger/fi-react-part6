@@ -12,7 +12,12 @@ import {
   DialogActions,
   Box,
   Rating,
+  TextField,
+  Stack,
+  Alert,
 } from "@mui/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateProduct } from "../api/productsApi";
 import type { Product } from "../../../shared/types/product";
 import { useCartStore } from "../../cart/store/cartStore";
 import { useWishlistStore } from "../../wishlist/store/wishlistStore";
@@ -20,6 +25,23 @@ import { useWishlistStore } from "../../wishlist/store/wishlistStore";
 export function ProductCard({ product }: { product: Product }) {
   // Der Dialogstatus ist lokal: andere Komponenten müssen ihn nicht kennen.
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [editName, setEditName] = useState(product.name);
+  const [editPrice, setEditPrice] = useState(String(product.price));
+
+  const queryClient = useQueryClient();
+  const editMutation = useMutation({
+    mutationFn: () =>
+      updateProduct(product.id, {
+        name: editName.trim(),
+        price: Number(editPrice),
+      }),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["products"] });
+      setEditOpen(false);
+    },
+  });
+
   const addItem = useCartStore((state) => state.addItem); // Nur die Aktion abonnieren.
   const hasWishlistItem = useWishlistStore((state) => state.hasItem);
   const addWishlistItem = useWishlistStore((state) => state.addItem);
@@ -68,6 +90,18 @@ export function ProductCard({ product }: { product: Product }) {
             >
               ♥ Merken
             </Button>
+            <Button
+              size="small"
+              variant="text"
+              onClick={() => {
+                setEditName(product.name);
+                setEditPrice(String(product.price));
+                setEditOpen(true);
+              }}
+              sx={{ mr: 1 }}
+            >
+              Bearbeiten
+            </Button>
             <Button size="small" variant="text" onClick={() => setDetailsOpen(true)} sx={{ mr: 1 }}>
               Details
             </Button>
@@ -110,6 +144,55 @@ export function ProductCard({ product }: { product: Product }) {
         <DialogActions>
           <Button onClick={() => setDetailsOpen(false)} variant="contained" fullWidth>
             Fertig
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Edit Dialog */}
+      <Dialog open={editOpen} onClose={() => setEditOpen(false)} maxWidth="xs" fullWidth>
+        <DialogTitle>
+          <Typography variant="overline" display="block" color="text.secondary">
+            TANSTACK QUERY · useMutation
+          </Typography>
+          <Typography variant="h5" fontWeight={700}>
+            ✏️ Produkt bearbeiten
+          </Typography>
+        </DialogTitle>
+        <DialogContent dividers>
+          <Stack spacing={2} sx={{ mt: 1 }}>
+            <TextField
+              label="Produktname"
+              value={editName}
+              onChange={(e) => setEditName(e.target.value)}
+              required
+              fullWidth
+              size="small"
+            />
+            <TextField
+              label="Preis (€)"
+              type="number"
+              value={editPrice}
+              onChange={(e) => setEditPrice(e.target.value)}
+              inputProps={{ min: 0, step: 0.01 }}
+              required
+              fullWidth
+              size="small"
+            />
+            {editMutation.isError && (
+              <Alert severity="error">
+                {editMutation.error.message}
+              </Alert>
+            )}
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEditOpen(false)}>Abbrechen</Button>
+          <Button
+            onClick={() => editMutation.mutate()}
+            variant="contained"
+            disabled={editMutation.isPending || !editName.trim() || !editPrice.trim()}
+          >
+            {editMutation.isPending ? "Speichert…" : "Speichern"}
           </Button>
         </DialogActions>
       </Dialog>
